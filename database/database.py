@@ -8,7 +8,7 @@ import asyncio
 
 from sqlalchemy import Column, Integer, Boolean, String, ForeignKey, UniqueConstraint, func
 
-DATABASE_URL = os.environ.get("DATABASE_URL", "postgres://ghnzieem:4fI1WxVrSgrWNf2j2KJgmDUfqeiHPJXq@peanut.db.elephantsql.com/ghnzieem")
+DATABASE_URL = "postgres://ghnzieem:4fI1WxVrSgrWNf2j2KJgmDUfqeiHPJXq@peanut.db.elephantsql.com/ghnzieem"
 
 def start() -> scoped_session:
     engine = create_engine(DATABASE_URL, client_encoding="utf8")
