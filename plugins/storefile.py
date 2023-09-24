@@ -40,7 +40,7 @@ async def storefile(c, m):
 
     # creating urls
     bot = await c.get_me()
-    base64_string = await encode_string(f"{m.chat.id}_{msg.reply_to_message_id}")
+    base64_string = await encode_string(f"{m.chat.id}_{msg.id}")
     url = f"https://t.me/{bot.username}?start={base64_string}"
     txt = urllib.parse.quote(text.replace('--', ''))
     share_url = f"tg://share?url={txt}File%20Link%20👉%20{url}"
@@ -50,7 +50,7 @@ async def storefile(c, m):
         InlineKeyboardButton(text="Open Url 🔗", url=url),
         InlineKeyboardButton(text="Share Link 👤", url=share_url)
         ],[
-        InlineKeyboardButton(text="Delete 🗑", callback_data=f"delete+{msg.reply_to_message_id}")
+        InlineKeyboardButton(text="Delete 🗑", callback_data=f"delete+{msg.id}")
     ]]
 
     # sending message
@@ -95,7 +95,7 @@ async def storefile_channel(c, m):
 
     # creating urls
     bot = await c.get_me()
-    base64_string = await encode_string(f"{m.chat.id}_{msg.reply_to_message_id}")
+    base64_string = await encode_string(f"{m.chat.id}_{msg.id}")
     url = f"https://t.me/{bot.username}?start={base64_string}"
     txt = urllib.parse.quote(text.replace('--', ''))
     share_url = f"tg://share?url={txt}File%20Link%20👉%20{url}"
