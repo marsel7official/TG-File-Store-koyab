@@ -1,4 +1,4 @@
 echo "started"
 git pull -f -q
 pip install --quiet -r requirements.txt
-python3 -m bot.py
+python3 -m bot
