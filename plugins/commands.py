@@ -177,7 +177,7 @@ async def batch(c, m):
             copy_message = await file.copy(int(DB_CHANNEL_ID))
         else:
             copy_message = await file.copy(m.from_user.id)
-        string += f"{copy_message.message_id}-"
+        string += f"{copy_message.reply_to_message_id}-"
         await asyncio.sleep(1)
 
     string_base64 = await encode_string(string[:-1])
