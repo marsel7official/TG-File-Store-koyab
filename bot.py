@@ -14,7 +14,7 @@ def main():
     plugins = dict(root="plugins")
     app = Client("FileStore",
                  bot_token=BOT_TOKEN,
-                 api_id=API_ID,
+                 api_id=APP_ID,
                  api_hash=API_HASH,
                  plugins=plugins,
                  workers=100)
