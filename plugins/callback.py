@@ -73,8 +73,6 @@ async def about_cb(c, m):
 📢 𝐂𝐡𝐚𝐧𝐧𝐞𝐥: [NS BOT UPDATES](https://t.me/Wizard_Bots)
 
 👥 𝐆𝐫𝐨𝐮𝐩: [Ns BOT SUPPORT](https://t.me/WizardBotHelper)
-
-🌐𝐒𝐨𝐮𝐫𝐜𝐞 𝐂𝐨𝐝𝐞: [Press Me 🥰](https://github.com/Ns-Bots/TG-File-Store)
 """
 
     # creating buttons
