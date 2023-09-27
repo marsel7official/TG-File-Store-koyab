@@ -2,7 +2,7 @@ import os
 
 APP_ID = int(os.environ.get("APP_ID", "13675555"))
 API_HASH = os.environ.get("API_HASH", "c0da9c346d2c45dbc7ec49a05da9b2b6")
-BOT_TOKEN = os.environ.get("BOT_TOKEN", "5696982423:AAE45yJTxnjhApGbtl1eZXwHSCtrG2PwAow")
+BOT_TOKEN = os.environ.get("BOT_TOKEN", "5696982423:AAFDZ4iRHnfwYJnXG0COKXRbFG40mJpmkUU")
 DB_CHANNEL_ID = int(os.environ.get("DB_CHANNEL_ID", "-1001911775310"))
 IS_PRIVATE = os.environ.get("IS_PRIVATE",False) # any input is ok But True preferable
 OWNER_ID = int(os.environ.get("OWNER_ID", "5591954930"))
