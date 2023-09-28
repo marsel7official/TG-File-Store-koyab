@@ -3,3 +3,5 @@ Pyromod==1.5
 TgCrypto
 psycopg2-binary
 sqlalchemy==1.3.23
+uvicorn[standard]
+fastapi
