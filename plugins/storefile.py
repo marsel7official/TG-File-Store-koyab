@@ -77,7 +77,6 @@ async def storefile_channel(c, m):
     # text
     text = ""
     if not m.photo:
-    if not m.photo:
         text = "--**🗃️ File Details:**--\n\n\n"
         text += f"📂 **File Name:** `{media.file_name}`\n" if media.file_name else ""
         text += f"💽 **Mime Type:** `{media.mime_type}`\n" if media.mime_type else ""
