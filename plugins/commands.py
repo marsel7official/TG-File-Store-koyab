@@ -75,7 +75,7 @@ async def start(c, m, cb=False):
                     owner = await c.get_users(int(OWNER_ID))
                     return await m.reply_text(f"🥴 Sorry bro your file was deleted by file owner or bot owner\n\nFor more help contact my owner 👉 {owner.mention(style='md')}")
                 try:
-                    await msg.copy(m.from_user.id, protect_content=PROTECT_CONTENT)
+                    await msg.copy(m.from_user.id, protect_content=PROTECT_CONTENT or cmd == "protectedbatch")
                     await asyncio.sleep(1)
                 except FloodWait as e:
                     await asyncio.sleep(e.x)
@@ -182,11 +182,13 @@ async def batch(c, m):
 
     string_base64 = await encode_string(string[:-1])
     send = await c.send_message(m.from_user.id, string_base64) if not DB_CHANNEL_ID else await c.send_message(int(DB_CHANNEL_ID), string_base64)
-    base64_string = await encode_string(f"batch_{m.chat.id}_{send.id}")
+    base64_string1 = await encode_string(f"batch_{m.chat.id}_{send.id}")
+    base64_string2 = await encode_string(f"protectedbatch_{m.chat.id}_{send.id}")
     bot = await c.get_me()
-    url = f"https://t.me/{bot.username}?start={base64_string}"
+    url1 = f"https://t.me/{bot.username}?start={base64_string1}"
+    url2 = f"https://t.me/{bot.username}?start={base64_string2}"
 
-    await message.edit(text=url)
+    await message.edit(text=f"🔗 Normal Url: {url1}\n🛡️ Protected Url: {url2}")
 
 @Client.on_message(filters.command('mode') & filters.incoming & filters.private)
 async def set_mode(c,m):
