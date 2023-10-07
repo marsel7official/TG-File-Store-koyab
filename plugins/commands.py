@@ -79,7 +79,7 @@ async def start(c, m, cb=False):
                     await asyncio.sleep(1)
                 except FloodWait as e:
                     await asyncio.sleep(e.x)
-                    await msg.copy(m.from_user.id, protect_content=PROTECT_CONTENT)
+                    await msg.copy(m.from_user.id, protect_content=PROTECT_CONTENT or cmd == "protectedbatch")
                 except:
                     pass
             return
@@ -96,20 +96,20 @@ async def start(c, m, cb=False):
         if as_uploadername:
             if chat_id.startswith('-100'):
                 channel = await c.get_chat(int(chat_id))
-                caption += "**--Uploader Details:--**\n\n" 
+                caption += "**--Uploader Details:--**\n" 
                 caption += f"**📢 Channel Name:** `{channel.title}`\n" 
                 caption += f"**🗣 User Name:** @{channel.username}\n" if channel.username else "" 
                 caption += f"**👤 Channel Id:** `{channel.id}`\n" 
                 caption += f"**💬 DC ID:** {channel.dc_id}\n" if channel.dc_id else "" 
-                caption += f"**👁 Members Count:** {channel.members_count}\n" if channel.members_count else ""
+                caption += f"**👁 Members Count:** {channel.members_count}" if channel.members_count else ""
             else:
                 user = await c.get_users(int(chat_id)) 
-                caption += "**--Uploader Details:--**\n\n" 
+                caption += "**--Uploader Details:--**\n" 
                 caption += f"**🦚 First Name:** `{user.first_name}`\n" 
                 caption += f"**🐧 Last Name:** `{user.last_name}`\n" if user.last_name else "" 
                 caption += f"**👁 User Name:** @{user.username}\n" if user.username else "" 
                 caption += f"**👤 User Id:** `{user.id}`\n" 
-                caption += f"**💬 DC ID:** {user.dc_id}\n" if user.dc_id else ""
+                caption += f"**💬 DC ID:** {user.dc_id}" if user.dc_id else ""
 
 
         await send_msg.delete()
@@ -128,7 +128,7 @@ async def me(c, m):
     """ This will be sent when /me command was used"""
 
     me = await c.get_users(m.from_user.id)
-    text = "--**YOUR DETAILS:**--\n\n"
+    text = "--**YOUR DETAILS:**--\n"
     text += f"**🦚 First Name:** `{me.first_name}`\n"
     text += f"**🐧 Last Name:** `{me.last_name}`\n" if me.last_name else ""
     text += f"**👁 User Name:** @{me.username}\n" if me.username else ""
@@ -137,7 +137,7 @@ async def me(c, m):
     text += f"**✔ Is Verified By TELEGRAM:__ `{me.is_verified}`\n\n" if me.is_verified else ""
     text += f"**👺 Is Fake:** {me.is_fake}\n" if me.is_fake else ""
     text += f"**💨 Is Scam:** {me.is_scam}\n" if me.is_scam else ""
-    text += f"**📃 Language Code:** {me.language_code}\n" if me.language_code else ""
+    text += f"**📃 Language Code:** {me.language_code}" if me.language_code else ""
 
     await m.reply_text(text, quote=True)
 
