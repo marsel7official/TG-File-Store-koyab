@@ -84,7 +84,7 @@ async def start(c, m, cb=False):
                     pass
             return
 
-        chat_id, msg_id = m.command[1].split('_')
+        *_, chat_id, msg_id = m.command[1].split('_')
         msg = await c.get_messages(int(chat_id), int(msg_id)) if not DB_CHANNEL_ID else await c.get_messages(int(DB_CHANNEL_ID), int(msg_id))
 
         if msg.empty:
@@ -113,7 +113,7 @@ async def start(c, m, cb=False):
 
 
         await send_msg.delete()
-        await msg.copy(m.from_user.id, caption=caption, protect_content=PROTECT_CONTENT)
+        await msg.copy(m.from_user.id, caption=caption, protect_content=PROTECT_CONTENT or _)
 
 
     else: # sending start message

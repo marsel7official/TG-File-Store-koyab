@@ -40,16 +40,22 @@ async def storefile(c, m):
 
     # creating urls
     bot = await c.get_me()
-    base64_string = await encode_string(f"{m.chat.id}_{msg.id}")
-    url = f"https://t.me/{bot.username}?start={base64_string}"
+    base64_string1 = await encode_string(f"{m.chat.id}_{msg.id}")
+    base64_string2 = await encode_string(f"protect_{m.chat.id}_{msg.id}")
+    url1 = f"https://t.me/{bot.username}?start={base64_string1}"
+    url2 = f"https://t.me/{bot.username}?start={base64_string2}"
     txt = urllib.parse.quote(text.replace('--', ''))
-    share_url = f"tg://share?url={txt}File%20Link%20👉%20{url}"
+    share_url = f"tg://share?url={txt}File%20Link%20👉%20{url1}"
 
     # making buttons
     buttons = [[
-        InlineKeyboardButton(text="Open Url 🔗", url=url),
+        InlineKeyboardButton(text="Open Url 🔗", url=url1),
         InlineKeyboardButton(text="Share Link 👤", url=share_url)
-        ],[
+        ],
+        [
+        InlineKeyboardButton("Protected Url 🛡️", url=url2),
+        ],
+        [
         InlineKeyboardButton(text="Delete 🗑", callback_data=f"delete+{msg.id}")
     ]]
 
@@ -95,16 +101,20 @@ async def storefile_channel(c, m):
 
     # creating urls
     bot = await c.get_me()
-    base64_string = await encode_string(f"{m.chat.id}_{msg.id}")
-    url = f"https://t.me/{bot.username}?start={base64_string}"
+    base64_string1 = await encode_string(f"{m.chat.id}_{msg.id}")
+    base64_string2 = await encode_string(f"protect_{m.chat.id}_{msg.id}")
+    url1 = f"https://t.me/{bot.username}?start={base64_string1}"
+    url2 = f"https://t.me/{bot.username}?start={base64_string2}"
     txt = urllib.parse.quote(text.replace('--', ''))
-    share_url = f"tg://share?url={txt}File%20Link%20👉%20{url}"
+    share_url = f"tg://share?url={txt}File%20Link%20👉%20{url1}"
 
     # making buttons
     buttons = [[
-        InlineKeyboardButton(text="Open Url 🔗", url=url),
+        InlineKeyboardButton(text="Open Url 🔗", url=url1),
         InlineKeyboardButton(text="Share Link 👤", url=share_url)
-    ]]
+    ],
+       [InlineKeyboardButton("Protected Url 🛡️", url=url2)]
+    ]
 
     # Editing and adding the buttons
     await m.edit_reply_markup(InlineKeyboardMarkup(buttons))
