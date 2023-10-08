@@ -214,7 +214,7 @@ async def encode_string(string):
     return base64_string
 
 @Client.on_message(filters.private & filters.command('broadcast') & filters.user(OWNER_ID))
-async def send_text(client: Bot, message: Message):
+async def send_text(client: Client, message: Message):
     if message.reply_to_message:
         query = await query_msg()
         broadcast_msg = message.reply_to_message
@@ -259,7 +259,7 @@ Unsuccessful: <code>{unsuccessful}</code></b>"""
         await msg.delete()
 
 @Client.on_message(filters.command('users') & filters.private & filters.user(OWNER_ID))
-async def get_users(client: Bot, message: Message):
+async def get_users(client: Client, message: Message):
     msg = await client.send_message(chat_id=message.chat.id, text=WAIT_MSG)
     users = await full_userbase()
     await msg.edit(f"{len(users)} users are using this bot")
