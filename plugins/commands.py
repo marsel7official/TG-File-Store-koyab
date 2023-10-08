@@ -98,18 +98,12 @@ async def start(c, m, cb=False):
                 channel = await c.get_chat(int(chat_id))
                 caption += "**--Uploader Details:--**\n" 
                 caption += f"**📢 Channel Name:** `{channel.title}`\n" 
-                caption += f"**🗣 User Name:** @{channel.username}\n" if channel.username else "" 
-                caption += f"**👤 Channel Id:** `{channel.id}`\n" 
-                caption += f"**💬 DC ID:** {channel.dc_id}\n" if channel.dc_id else "" 
-                caption += f"**👁 Members Count:** {channel.members_count}" if channel.members_count else ""
+                caption += f"**🗣 User Name:** @{channel.username}\n" if channel.username else ""
             else:
                 user = await c.get_users(int(chat_id)) 
-                caption += "**--Uploader Details:--**\n" 
-                caption += f"**🦚 First Name:** `{user.first_name}`\n" 
-                caption += f"**🐧 Last Name:** `{user.last_name}`\n" if user.last_name else "" 
+                caption += "**--Uploader Details:--**\n"
                 caption += f"**👁 User Name:** @{user.username}\n" if user.username else "" 
-                caption += f"**👤 User Id:** `{user.id}`\n" 
-                caption += f"**💬 DC ID:** {user.dc_id}" if user.dc_id else ""
+                caption += f"**👤 User Id:** `{user.id}`\n"
 
 
         await send_msg.delete()
