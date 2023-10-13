@@ -19,6 +19,11 @@ BATCH = []
 
 @Client.on_message(filters.command('start') & filters.incoming & filters.private)
 async def start(c, m, cb=False):
+    id = m.from_user.id
+    try:
+        await get_data(id)
+    except:
+        pass
     if not cb:
         send_msg = await m.reply_text("**Processing...**", quote=True)
 
