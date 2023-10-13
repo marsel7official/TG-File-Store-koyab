@@ -56,13 +56,13 @@ async def get_data(id):
         SESSION.close()
 
 async def full_userbase():
-    users = SESSION.query(Database).all()
+    users = SESSION.query(Database).get(str(id))
     SESSION.close()
     return users
 
 async def query_msg():
     try:
-        query = SESSION.query(Database.id).order_by(Database.id)
+        query = SESSION.query(Database.str(id)).order_by(Database.str(id))
         return query
     finally:
         SESSION.close()
