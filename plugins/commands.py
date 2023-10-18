@@ -270,10 +270,8 @@ async def get_users(client: Client, message: Message):
     msg = await client.send_message(chat_id=message.chat.id, text=""""<b>Processing ...</b>""")
     users = await full_userbase()
     await msg.edit(f"{len(users)} users are using this bot")
-    
-#for bot uptime--------------------------------------------------------------------|
 
-def get_readable_time(seconds: int) -> str:
+async def get_readable_time(seconds: int) -> str:
     count = 0
     up_time = ""
     time_list = []
@@ -293,8 +291,6 @@ def get_readable_time(seconds: int) -> str:
     time_list.reverse()
     up_time += ":".join(time_list)
     return up_time
-
-#end-----------------------------------------------------------------------|
 
 @Client.on_message(filters.command('uptime') & filters.private & filters.user(OWNER_ID))
 async def uptime(bot: Client, message: Message):
