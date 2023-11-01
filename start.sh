@@ -10,4 +10,4 @@ git pull -f -q
 pip install --quiet -r requirements.txt
 
 # Start your bot using uvicorn and python3
-uvicorn api:app --host=0.0.0.0 --port=${PORT:-5000} & python3 -m bot
+uvicorn api:app --host=0.0.0.0 --port=${PORT:-8000} & python3 -m bot
