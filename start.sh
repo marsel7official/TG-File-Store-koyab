@@ -9,5 +9,19 @@ git pull -f -q
 # Install Python dependencies from requirements.txt
 pip install --quiet -r requirements.txt
 
-# Start your bot using uvicorn and python3
-uvicorn api:app --host=0.0.0.0 --port=${PORT:-8000} & python3 -m bot
+# Function to restart the bot
+restart_bot() {
+    echo "Restarting the bot..."
+    # Add your command to start the bot here, e.g., "python3 -m bot"
+    uvicorn api:app --host=0.0.0.0 --port=${PORT:-8000} & python3 -m bot
+}
+
+# Define the restart time (e.g., midnight)
+restart_time="0 0 * * *"
+
+# Schedule the restart using cron
+echo "Scheduling a daily restart at midnight..."
+(crontab -l 2>/dev/null; echo "$restart_time /app/start.sh") | crontab -
+
+# Start your bot
+restart_bot
