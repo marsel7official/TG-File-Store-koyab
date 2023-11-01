@@ -25,7 +25,7 @@ RUN chmod +x /app/start.sh
 RUN apt-get update -y && apt-get install -y cron
 
 # Add a cron job that runs your script every 24 hours (adjust the timing as needed)
-RUN (echo "0 0 * * * /app/start.sh" && crontab -l) | crontab
+RUN echo "0 0 * * * /app/start.sh" > /etc/cron.d/bot-cron
 
 # Start cron in the foreground to trigger the cron jobs
 CMD ["cron", "-f"]
