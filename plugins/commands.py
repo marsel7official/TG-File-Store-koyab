@@ -3,7 +3,7 @@ import asyncio
 import time
 import logging
 import logging.config
-import datetime
+from datetime import datetime
 
 # Get logging configurations
 logging.getLogger().setLevel(logging.ERROR)
