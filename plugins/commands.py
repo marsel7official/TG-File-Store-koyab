@@ -15,7 +15,7 @@ from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from database.database import *
 from config import *
-from bot import app
+from bot import main
 
 BATCH = []
 
