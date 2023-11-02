@@ -293,9 +293,8 @@ async def get_readable_time(seconds: int) -> str:
     return up_time
 
 @Client.on_message(filters.command('uptime') & filters.private & filters.user(OWNER_ID))
-async def uptime(client: Client, message: Message):
-    UPTIME_TEXT = "<b>BOT UPTIME</b>\n\n{uptime}"
+async def uptime_command(client, message):
     now = datetime.now()
-    delta = now - client.uptime
-    time = get_readable_time(delta.seconds)
-    await message.reply(UPTIME_TEXT.format(uptime=time))
+    delta = now - start_time
+    time = await get_readable_time(delta.seconds)
+    await message.reply(f"<b>BOT UPTIME</b>\n\n{time}")
