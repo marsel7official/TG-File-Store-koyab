@@ -18,10 +18,6 @@ from config import *
 
 BATCH = []
 
-@Client.on_start
-async def on_start(client, _):
-    client.uptime = datetime.now()
-
 
 @Client.on_message(filters.command('start') & filters.incoming & filters.private)
 async def start(c, m, cb=False):
