@@ -175,8 +175,7 @@ async def batch(c, m):
             except Exception as e:
                 print(e)
         i += 1
-
-    IS_BATCH_PROCESSING = False
+        
     message = await m.reply_text("Generating shareable link 🔗")
     string = ""
     for file in files:
@@ -196,6 +195,7 @@ async def batch(c, m):
     url2 = f"https://t.me/{bot.username}?start={base64_string2}"
 
     await message.edit(text=f"🔗 Normal Url: {url1}\n🛡️ Protected Url: {url2}")
+    IS_BATCH_PROCESSING = False
 
 @Client.on_message(filters.command('mode') & filters.incoming & filters.private)
 async def set_mode(c,m):
