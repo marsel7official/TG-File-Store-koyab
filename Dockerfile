@@ -3,7 +3,7 @@ FROM python:3.11.6
 
 # Install system dependencies and clean up
 RUN apt-get update -y && apt-get upgrade -y && \
-    apt-get install -y --no-install-recommends git && \
+    apt-get install -y --no-install-recommends git cron && \
     rm -rf /var/lib/apt/lists/*
 
 # Clone your bot repository into /app
