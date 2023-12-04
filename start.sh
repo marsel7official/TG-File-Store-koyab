@@ -21,7 +21,7 @@ restart_time="0 0 * * *"
 
 # Schedule the restart using cron
 echo "Scheduling a daily restart at midnight..."
-(crontab -l 2>/dev/null; echo "$restart_time /app/start.sh") | crontab -
+(crontab -l 2>/dev/null; echo "$restart_time /bin/bash /app/start.sh >> /app/cron.log 2>&1") | crontab -
 
 # Start your bot
 restart_bot
