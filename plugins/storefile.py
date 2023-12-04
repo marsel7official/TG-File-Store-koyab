@@ -5,9 +5,15 @@ from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from config import *
 
+IS_BATCH_PROCESSING = False
+BATCH = []
+
 #################################### FOR PRIVATE ################################################
-@Client.on_message((filters.document|filters.video|filters.audio|filters.photo) & filters.incoming & ~filters.channel)
+@Client.on_message((filters.document | filters.video | filters.audio | filters.photo) & filters.incoming & ~filters.channel)
 async def storefile(c, m):
+    global IS_BATCH_PROCESSING
+    if IS_BATCH_PROCESSING:
+        return
     if IS_PRIVATE:
         if m.from_user.id not in AUTH_USERS:
             return
