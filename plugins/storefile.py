@@ -1,8 +1,10 @@
 import os
 import urllib
+import base64
 from .commands import encode_string
 from pyrogram import Client, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from config import *
 
 BATCH=[]
