@@ -5,6 +5,7 @@ from .commands import encode_string
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
+from .commands import BATCH
 from config import *
     
 
