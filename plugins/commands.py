@@ -15,6 +15,7 @@ from pyrogram.errors import FloodWait, UserIsBlocked, InputUserDeactivated
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from database.database import *
 from config import *
+from bot import main
 
 BATCH = []
 
@@ -298,9 +299,9 @@ async def get_readable_time(seconds: int) -> str:
     return up_time
 
 @Client.on_message(filters.command('uptime') & filters.private & filters.user(OWNER_ID))
-async def uptime(c, message: Message):
+async def uptime(c, main, message: Message):
     UPTIME_TEXT = "<b>BOT UPTIME</b>\n\n{uptime}"
     now = datetime.now()
-    delta = now - c.uptime
+    delta = now - main.uptime
     time = get_readable_time(delta.seconds)
     await message.reply(UPTIME_TEXT.format(uptime=time))
