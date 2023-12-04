@@ -17,8 +17,6 @@ from database.database import *
 from config import *
 from bot import main
 
-BATCH = []
-
 
 @Client.on_message(filters.command('start') & filters.incoming & filters.private)
 async def start(c, m, cb=False):
