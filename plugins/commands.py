@@ -146,10 +146,12 @@ async def me(c, m):
 
 @Client.on_message(filters.command('batch') & filters.private & filters.incoming)
 async def batch(c, m):
+    global IS_BATCH_PROCESSING
     """ This is for batch command"""
     if IS_PRIVATE:
         if m.from_user.id not in AUTH_USERS:
             return
+    IS_BATCH_PROCESSING = True
     BATCH.append(m.from_user.id)
     files = []
     i = 1
@@ -158,6 +160,7 @@ async def batch(c, m):
         if i == 1:
             media = await c.ask(chat_id=m.from_user.id, text='Send me some files or videos or photos or text or audio, if possible send 1 by 1. If you want to cancel the process send /cancel')
             if media.text == "/cancel":
+                IS_BATCH_PROCESSING = False
                 return await m.reply_text('Cancelled Successfully ✌')
             files.append(media)
         else:
@@ -165,13 +168,14 @@ async def batch(c, m):
                 reply_markup = InlineKeyboardMarkup([[InlineKeyboardButton('Done ✅', callback_data='done')]])
                 media = await c.ask(chat_id=m.from_user.id, text='Ok 😉. Now send me some more files Or press done to get shareable link. If you want to cancel the process send /cancel', reply_markup=reply_markup)
                 if media.text == "/cancel":
+                    IS_BATCH_PROCESSING = False
                     return await m.reply_text('Cancelled Successfully ✌')
                 files.append(media)
             except Exception as e:
                 print(e)
-                await m.reply_text(text="Something went wrong. Try again later.")
         i += 1
 
+    IS_BATCH_PROCESSING = False
     message = await m.reply_text("Generating shareable link 🔗")
     string = ""
     for file in files:
