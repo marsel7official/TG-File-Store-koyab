@@ -140,25 +140,25 @@ async def batch_command_handler(c, m):
     
     message = await m.reply_text("Send me some files, videos, photos, text, or audio, one by one. Send /done when finished or /cancel to cancel.")
     
-    batch_state = {"chat_id": m.from_user.id, "message_id": message.id, "step": 1}
+    @Client.on_message(filters.private & filters.incoming)
+    async def handle_messages(c, m):
+        if m.from_user.id not in BATCH_MESSAGES:
+            return
+        
+        if m.text and m.text.lower() == "/cancel":
+            del BATCH_MESSAGES[m.from_user.id]
+            await message.reply_text('Cancelled Successfully ✌')
+            return
+        elif m.text and m.text.lower() == "/done":
+            await finalize_batch(c, m, message)
+            return
+        
+        BATCH_MESSAGES[m.from_user.id].append(m)
     
-    while True:
-        try:
-            media = await c.ask(chat_id=m.from_user.id, text='Send me a file or type /done to finish or /cancel to cancel.')
-            if media.text.lower() == "/cancel":
-                del BATCH_MESSAGES[m.from_user.id]
-                await message.reply_text('Cancelled Successfully ✌')
-                return
-            elif media.text.lower() == "/done":
-                break
-            BATCH_MESSAGES[m.from_user.id].append(media)
-            batch_state["step"] += 1
-        except FloodWait as e:
-            await asyncio.sleep(e.value + 5)  # Wait for the time specified by Telegram + 5 seconds
-            continue
-        except Exception as e:
-            print(e)
+    await message.edit_text("Send me some files, videos, photos, text, or audio, one by one. Send /done when finished or /cancel to cancel.")
     
+
+async def finalize_batch(c, m, message):
     await message.edit("Generating shareable link 🔗")
     
     files = BATCH_MESSAGES[m.from_user.id]
