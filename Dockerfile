@@ -7,7 +7,7 @@ RUN apt-get update -y && apt-get upgrade -y && \
     rm -rf /var/lib/apt/lists/*
 
 # Clone your bot repository into /app
-RUN /app
+RUN git clone https://github.com/marsel7official/TG-File-Store-koyab /app
 
 # Set the working directory to /app
 WORKDIR /app
